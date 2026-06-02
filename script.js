@@ -49,7 +49,6 @@ function initHeroParallax() {
 
   const watermark = hero.querySelector(".hero-watermark");
   const ringWrap = hero.querySelector(".hero-ring-wrap");
-  const orbs = hero.querySelectorAll(".hero-orb");
 
   hero.addEventListener("mousemove", (e) => {
     const rect = hero.getBoundingClientRect();
@@ -62,18 +61,11 @@ function initHeroParallax() {
     if (ringWrap) {
       ringWrap.style.transform = `translate(${x * 18}px, ${y * 18}px)`;
     }
-    orbs.forEach((orb, i) => {
-      const depth = (i + 1) * 10;
-      orb.style.transform = `translate(${x * depth}px, ${y * depth}px)`;
-    });
   });
 
   hero.addEventListener("mouseleave", () => {
     if (watermark) watermark.style.transform = "";
     if (ringWrap) ringWrap.style.transform = "";
-    orbs.forEach((orb) => {
-      orb.style.transform = "";
-    });
   });
 }
 

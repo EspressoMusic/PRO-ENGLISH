@@ -18,9 +18,6 @@
   --toggle-thumb: #ffffff;
   --toggle-shadow: rgba(26, 24, 20, 0.12);
   --luxury: #9a7b52;
-  --luxury-soft: rgba(154, 123, 82, 0.14);
-  --hero-orb-1: rgba(154, 123, 82, 0.18);
-  --hero-orb-2: rgba(196, 170, 130, 0.22);
 }
 
 [data-theme="dark"] {
@@ -42,9 +39,6 @@
   --toggle-thumb: #111111;
   --toggle-shadow: rgba(0, 0, 0, 0.35);
   --luxury: #c4a574;
-  --luxury-soft: rgba(196, 165, 116, 0.12);
-  --hero-orb-1: rgba(196, 165, 116, 0.08);
-  --hero-orb-2: rgba(154, 123, 82, 0.06);
 }
 
 * {
@@ -177,39 +171,6 @@ body {
   inset: 0;
   overflow: hidden;
   pointer-events: none;
-}
-
-.hero-orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(60px);
-  animation: orb-float 9s ease-in-out infinite alternate;
-}
-
-.hero-orb-1 {
-  width: 340px;
-  height: 340px;
-  top: -8%;
-  right: -4%;
-  background: var(--hero-orb-1);
-}
-
-.hero-orb-2 {
-  width: 260px;
-  height: 260px;
-  bottom: 8%;
-  left: 38%;
-  background: var(--hero-orb-2);
-  animation-delay: -3s;
-}
-
-.hero-orb-3 {
-  width: 180px;
-  height: 180px;
-  top: 42%;
-  left: -6%;
-  background: var(--luxury-soft);
-  animation-delay: -5s;
 }
 
 .hero-watermark {
@@ -388,27 +349,34 @@ body {
 .grid {
   position: relative;
   z-index: 1;
-  max-width: 1440px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 80px 40px;
+  padding: 64px 32px;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 28px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding: 56px 24px;
+  }
+}
+
+@media (max-width: 640px) {
   .grid {
     grid-template-columns: 1fr;
-    padding: 60px 24px;
+    padding: 48px 20px;
   }
 }
 
 .tile {
-  aspect-ratio: 4 / 5;
-  min-height: 420px;
+  display: flex;
+  flex-direction: column;
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 6px;
+  border-radius: 0;
   text-decoration: none;
   color: inherit;
   position: relative;
@@ -445,11 +413,12 @@ body {
 }
 
 .tile-preview {
-  position: absolute;
-  inset: 0;
-  bottom: 100px;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
   overflow: hidden;
   background: #0c0c0c;
+  flex-shrink: 0;
 }
 
 .tile-preview::before {
@@ -487,30 +456,28 @@ body {
 }
 
 .tile-info {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 22px 26px 26px;
-  background: var(--tile-info-bg);
+  position: relative;
+  padding: 16px 18px 18px;
+  background: var(--surface);
   z-index: 3;
   transition: background 0.35s ease;
+  border-top: 1px solid var(--border);
 }
 
 .tile-num {
   display: block;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 500;
   color: var(--muted);
   letter-spacing: 0.08em;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .tile h2 {
-  font-size: 22px;
+  font-size: 17px;
   font-weight: 600;
   letter-spacing: -0.01em;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
   transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -519,7 +486,7 @@ body {
 }
 
 .tile p {
-  font-size: 14px;
+  font-size: 12px;
   color: var(--muted);
   line-height: 1.5;
   transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
@@ -659,15 +626,6 @@ body {
   to {
     transform: scaleY(1);
     opacity: 1;
-  }
-}
-
-@keyframes orb-float {
-  from {
-    transform: translate(0, 0) scale(1);
-  }
-  to {
-    transform: translate(-18px, 22px) scale(1.08);
   }
 }
 
@@ -826,10 +784,6 @@ html:not([data-theme="dark"]) .theme-label:last-child {
   .scroll-hint {
     left: 20px;
     bottom: 24px;
-  }
-
-  .grid {
-    padding: 60px 20px;
   }
 
   .nav {
